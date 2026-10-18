@@ -44,7 +44,7 @@ export async function searchAll(q: string, limit = 200): Promise<Hit[]> {
   const all = (await keys()).filter((k) => String(k).startsWith("ch:")) as string[];
   const vals = await getMany<Chapter>(all);
   all.forEach((k, i) => {
-    const [, tr, book, ch] = k.split(":");
+    const [, tr = "", book = "", ch = "1"] = k.split(":");
     for (const v of vals[i]?.verses ?? []) {
       if (hits.length >= limit) return;
       if (v.text.toLowerCase().includes(needle)) hits.push({ book, chapter: +ch, verse: v.n, text: v.text, tr });
