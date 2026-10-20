@@ -34,9 +34,9 @@ export const BOOKS: Book[] = [
   ...OT.map(([name, chapters], i) => ({ id: slug(name), name, chapters, category: "ot" as const, apiId: i + 1 })),
   ...NT.map(([name, chapters], i) => ({ id: slug(name), name, chapters, category: "nt" as const, apiId: i + 40 })),
   ...[
-    "1 Enoch", "Jubilees", "4 Ezra", "3 Meqabyan", "4 Baruch", "Judith", "Tobit", "Sirach",
-    "Wisdom of Solomon", "Rest of Esther",
-  ].map((name) => ({ id: slug(name), name, chapters: 1, category: "deutero" as const })),
+    ["1 Enoch", 1], ["Jubilees", 1], ["4 Ezra", 16], ["3 Meqabyan", 1], ["4 Baruch", 9],
+    ["Judith", 1], ["Tobit", 1], ["Sirach", 1], ["Wisdom of Solomon", 1], ["Rest of Esther", 1],
+  ].map(([name, chapters]) => ({ id: slug(name as string), name: name as string, chapters: chapters as number, category: "deutero" as const })),
   ...[
     "Book of Jasher", "Book of Josippon", "Testaments of the 12 Patriarchs", "Lost Reference Summaries",
   ].map((name) => ({ id: slug(name), name, chapters: 1, category: "historical" as const })),
