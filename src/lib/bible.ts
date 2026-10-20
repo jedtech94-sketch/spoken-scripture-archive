@@ -1,6 +1,7 @@
 import { get, set, keys, getMany } from "idb-keyval";
 import { getBook, type Translation } from "@/data/books";
 import { EXTRA_TEXTS } from "@/data/extra-texts";
+import { BUNDLED_TEXTS } from "@/data/bundled-texts";
 
 export interface Verse { n: number; text: string }
 export interface Chapter { verses: Verse[]; heading?: string; source?: string; partial?: boolean }
@@ -14,6 +15,8 @@ export async function loadChapter(tr: Translation, bookId: string, ch: number): 
   const book = getBook(bookId);
   if (!book) throw new Error("Unknown book");
   if (!book.apiId) {
+    const b = BUNDLED_TEXTS[bookId];
+    if (b) return { verses: b.chapters[ch] ?? [], heading: `Chapter ${ch}`, source: b.source };
     const x = EXTRA_TEXTS[bookId];
     return { verses: x?.verses ?? [], heading: x?.heading, source: x?.source, partial: true };
   }
