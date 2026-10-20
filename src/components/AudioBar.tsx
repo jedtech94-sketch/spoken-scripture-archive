@@ -24,8 +24,8 @@ export function AudioBar({ verses, title, onVerse }: { verses: Verse[]; title: s
     const s = window.speechSynthesis;
     s.cancel();
     if (i >= verses.length) { stop(); return; }
-    idxRef.current = i; setIdx(i); onVerse(verses[i].n);
-    const u = new SpeechSynthesisUtterance(verses[i].text);
+    idxRef.current = i; setIdx(i); onVerse(verses[i]?.n ?? null);
+    const u = new SpeechSynthesisUtterance(verses[i]?.text ?? "");
     u.rate = rate;
     u.onend = () => { if (playRef.current && idxRef.current === i) speak(i + 1, rate); };
     s.speak(u);
@@ -36,9 +36,9 @@ export function AudioBar({ verses, title, onVerse }: { verses: Verse[]; title: s
     playRef.current = true; setPlaying(true); speak(idxRef.current);
   };
   const skip = (d: number) => { const n = Math.max(0, Math.min(verses.length - 1, idxRef.current + d)); if (playing) speak(n); else { idxRef.current = n; setIdx(n); } };
-  const cycleSpeed = () => { const s = SPEEDS[(SPEEDS.indexOf(speed) + 1) % SPEEDS.length]; setSpeed(s); if (playing) speak(idxRef.current, s); };
+  const cycleSpeed = () => { const s = SPEEDS[(SPEEDS.indexOf(speed) + 1) % SPEEDS.length] ?? 1; setSpeed(s); if (playing) speak(idxRef.current, s); };
   const cycleTimer = () => {
-    const t = TIMERS[(TIMERS.indexOf(timer) + 1) % TIMERS.length];
+    const t = TIMERS[(TIMERS.indexOf(timer) + 1) % TIMERS.length] ?? 0;
     setTimer(t); setEndsAt(t ? Date.now() + t * 60000 : null);
   };
   useEffect(() => {

@@ -26,25 +26,12 @@ export const EXTRA_TEXTS: Record<string, ExtraText> = {
       { n: 2, text: "For on the first day He created the heavens which are above and the earth and the waters and all the spirits which serve before Him—the angels of the presence, and the angels of sanctification, and the angels of the spirit of fire, and the angels of the spirit of the winds…" },
     ],
   },
-  "4-ezra": {
-    heading: "Excerpt (2 Esdras 7)",
-    source: "KJV Apocrypha, 1611",
-    verses: [
-      { n: 1, text: "And when I had made an end of speaking these words, there was sent unto me the angel which had been sent unto me the nights afore." },
-    ],
-  },
   "3-meqabyan": {
-    heading: "Summary",
+    heading: "Summary — full text not available",
     source: "Ethiopian canon (Ge'ez)",
     verses: [
-      { n: 1, text: "Third Meqabyan is a short book of the Ethiopian Orthodox canon, distinct from the Greek Maccabees, offering exhortations on repentance, the resurrection, and the justice of God. A full English text will be added." },
-    ],
-  },
-  "4-baruch": {
-    heading: "Summary (Paralipomena of Jeremiah)",
-    source: "Ethiopian canon",
-    verses: [
-      { n: 1, text: "Fourth Baruch tells of Jeremiah, Baruch and Abimelech at the fall of Jerusalem, Abimelech's sixty-six-year sleep, and the return from Babylon. A full English text will be added." },
+      { n: 1, text: "Third Meqabyan is a short book of the Ethiopian Orthodox canon, distinct from the Greek Maccabees, offering exhortations on repentance, the resurrection, and the justice of God." },
+      { n: 2, text: "No verified English translation of this book could be sourced: it survives fully only in Ge'ez, and no public-domain English rendering exists. Rather than include an unverified text, only this summary is shown." },
     ],
   },
   judith: {
@@ -96,10 +83,11 @@ export const EXTRA_TEXTS: Record<string, ExtraText> = {
     ],
   },
   "book-of-josippon": {
-    heading: "Summary",
+    heading: "Summary — full text not available",
     source: "Medieval Hebrew chronicle (10th c.)",
     verses: [
       { n: 1, text: "Josippon is a Hebrew history of the Jewish people from Adam to the fall of the Second Temple, drawing on Josephus and other sources, and was widely read in Ethiopia as Zena Ayhud." },
+      { n: 2, text: "No verified English translation of the full chronicle could be sourced: existing English translations are modern and under copyright, and no public-domain rendering exists. Rather than include an unverified text, only this summary is shown." },
     ],
   },
   "testaments-of-the-12-patriarchs": {
