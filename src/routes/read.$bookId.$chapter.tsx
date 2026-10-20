@@ -81,10 +81,10 @@ function Reader() {
       </div>
 
       <article className="px-5 py-6">
-        {data?.partial && (
+        {data?.source && (
           <div className="mb-5 rounded-lg border border-gold bg-secondary p-3 text-sm">
             <p className="font-semibold">{data.heading}</p>
-            <p className="text-muted-foreground">Selected passages · {data.source}</p>
+            <p className="text-muted-foreground">{data.partial ? "Selected passages" : "Full text"} · {data.source}</p>
           </div>
         )}
         {err && <p className="text-destructive">{err}</p>}
