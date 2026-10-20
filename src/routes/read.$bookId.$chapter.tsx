@@ -4,6 +4,7 @@ import { ChevronLeft, ChevronRight, Bookmark, Sun, Moon, Download, Check } from 
 import { AppShell, useReaderTheme } from "@/components/AppShell";
 import { AudioBar } from "@/components/AudioBar";
 import { getBook, TRANSLATIONS, type Translation } from "@/data/books";
+import { BUNDLED_TEXTS } from "@/data/bundled-texts";
 import { XREFS, type Ref } from "@/data/xrefs";
 import { loadChapter, isCached, type Chapter } from "@/lib/bible";
 import { usePref, HIGHLIGHTS, type HighlightColor } from "@/lib/prefs";
@@ -18,7 +19,7 @@ export const Route = createFileRoute("/read/$bookId/$chapter")({
     return { book, ch };
   },
   head: ({ loaderData }) => {
-    const t = loaderData ? `${loaderData.book.name} ${loaderData.book.apiId ? loaderData.ch : ""}`.trim() : "Reader";
+    const t = loaderData ? `${loaderData.book.name} ${loaderData.book.apiId || BUNDLED_TEXTS[loaderData.book.id] ? loaderData.ch : ""}`.trim() : "Reader";
     return {
       meta: [
         { title: `${t} — Chikuni Study Bible` },
@@ -62,7 +63,8 @@ function Reader() {
   };
 
   const k = (v: number) => `${book.id}.${ch}.${v}`;
-  const title = book.apiId ? `${book.name} ${ch}` : book.name;
+  const multi = !!book.apiId || !!BUNDLED_TEXTS[book.id];
+  const title = multi ? `${book.name} ${ch}` : book.name;
 
   return (
     <AppShell>
@@ -110,12 +112,14 @@ function Reader() {
           })}
         </div>
 
-        {book.apiId && data && (
+        {multi && data && (
           <div className="mt-8 flex items-center justify-between font-sans">
             {ch > 1 ? <Link to="/read/$bookId/$chapter" params={{ bookId: book.id, chapter: String(ch - 1) }} className="flex items-center gap-1 text-primary"><ChevronLeft className="h-4 w-4" />Prev</Link> : <span />}
-            <button onClick={downloadBook} disabled={dl !== "idle"} className="flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs">
-              {dl === "done" ? <><Check className="h-3.5 w-3.5" />Saved offline</> : dl === "busy" ? "Saving…" : <><Download className="h-3.5 w-3.5" />Save {book.name} offline</>}
-            </button>
+            {book.apiId ? (
+              <button onClick={downloadBook} disabled={dl !== "idle"} className="flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs">
+                {dl === "done" ? <><Check className="h-3.5 w-3.5" />Saved offline</> : dl === "busy" ? "Saving…" : <><Download className="h-3.5 w-3.5" />Save {book.name} offline</>}
+              </button>
+            ) : <span />}
             {ch < book.chapters ? <Link to="/read/$bookId/$chapter" params={{ bookId: book.id, chapter: String(ch + 1) }} className="flex items-center gap-1 text-primary">Next<ChevronRight className="h-4 w-4" /></Link> : <span />}
           </div>
         )}
