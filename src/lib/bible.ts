@@ -18,7 +18,7 @@ export async function loadChapter(tr: Translation, bookId: string, ch: number): 
     const b = BUNDLED_TEXTS[bookId];
     if (b) return { verses: b.chapters[ch] ?? [], heading: `Chapter ${ch}`, source: b.source };
     const x = EXTRA_TEXTS[bookId];
-    return { verses: x?.verses ?? [], heading: x?.heading, source: x?.source, partial: true };
+    return { verses: x?.verses ?? [], ...(x?.heading ? { heading: x.heading } : {}), ...(x?.source ? { source: x.source } : {}), partial: true };
   }
   const k = key(tr, bookId, ch);
   const cached = await get<Chapter>(k);
