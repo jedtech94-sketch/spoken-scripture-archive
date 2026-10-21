@@ -10,6 +10,8 @@ export const Route = createFileRoute("/library")({
       { name: "description", content: "Browse the Old and New Testaments, the Ethiopian deuterocanon and referenced historical texts." },
       { property: "og:title", content: "All Books — Chikuni Study Bible" },
       { property: "og:description", content: "Browse every book in the Chikuni Study Bible." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Library,

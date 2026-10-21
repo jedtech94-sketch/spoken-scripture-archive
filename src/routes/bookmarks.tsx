@@ -11,6 +11,8 @@ export const Route = createFileRoute("/bookmarks")({
       { name: "description", content: "Your saved verses in the Chikuni Study Bible." },
       { property: "og:title", content: "Bookmarks — Chikuni Study Bible" },
       { property: "og:description", content: "Your saved verses." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Bookmarks,
