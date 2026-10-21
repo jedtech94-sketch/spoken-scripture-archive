@@ -18,11 +18,11 @@ const tabs = [
   { to: "/bookmarks", label: "Saved", icon: Bookmark },
 ] as const;
 
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({ children, className = "" }: { children: ReactNode; className?: string }) {
   useReaderTheme();
   const path = useRouterState({ select: (s) => s.location.pathname });
   return (
-    <div className="mx-auto min-h-screen max-w-2xl pb-40">
+    <div className={`mx-auto min-h-screen max-w-2xl pb-40 ${className}`}>
       {children}
       <nav className="fixed inset-x-0 bottom-0 z-30 border-t bg-card/95 backdrop-blur">
         <div className="mx-auto flex max-w-2xl justify-around pb-[env(safe-area-inset-bottom)]">

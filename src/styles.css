@@ -59,6 +59,13 @@
   --color-hl-rose: var(--hl-rose);
   --color-hl-sage: var(--hl-sage);
   --color-hl-sky: var(--hl-sky);
+  --color-reader-paper: var(--reader-paper);
+  --color-reader-ink: var(--reader-ink);
+  --color-reader-verse: var(--reader-verse);
+  --color-reader-gold: var(--reader-gold);
+  --color-reader-burgundy: var(--reader-burgundy);
+  --color-reader-rule: var(--reader-rule);
+  --font-reader: "Crimson Pro", Georgia, serif;
   --font-display: "Cormorant Garamond", Georgia, serif;
   --font-scripture: "Spectral", Georgia, serif;
   --font-sans: "Karla", system-ui, sans-serif;
@@ -74,6 +81,12 @@
 }
 
 :root {
+  --reader-paper: oklch(0.9886 0.0057 84.57);
+  --reader-ink: oklch(0.29 0.018 35);
+  --reader-verse: oklch(0.48 0.065 15);
+  --reader-gold: oklch(0.68 0.105 80);
+  --reader-burgundy: oklch(0.4 0.1 15);
+  --reader-rule: oklch(0.88 0.025 80);
   --radius: 0.75rem;
   --gold: oklch(0.76 0.13 85);
   --burgundy: oklch(0.36 0.13 15);
@@ -108,6 +121,12 @@
 }
 
 .dark {
+  --reader-paper: oklch(0.1822 0 0);
+  --reader-ink: oklch(0.88 0.012 80);
+  --reader-verse: oklch(0.74 0.075 80);
+  --reader-gold: oklch(0.76 0.1 80);
+  --reader-burgundy: oklch(0.62 0.085 15);
+  --reader-rule: oklch(0.34 0.018 80);
   --background: oklch(0.2 0.025 170);
   --foreground: oklch(0.92 0.02 85);
   --card: oklch(0.25 0.03 170);
@@ -145,4 +164,48 @@
 
 @utility bg-hero {
   background: var(--pattern-cross), var(--gradient-hero);
+}
+
+.reader-shell,
+.reader-sheet {
+  --background: var(--reader-paper);
+  --foreground: var(--reader-ink);
+  --card: var(--reader-paper);
+  --card-foreground: var(--reader-ink);
+  --border: var(--reader-rule);
+  --primary: var(--reader-verse);
+  background-color: var(--reader-paper);
+  color: var(--reader-ink);
+}
+
+body:has(.reader-shell) {
+  background-color: var(--reader-paper);
+}
+
+.reader-glass {
+  background-color: color-mix(in oklab, var(--reader-paper) 82%, transparent);
+  backdrop-filter: blur(22px) saturate(125%);
+  border-top: 2px solid var(--reader-burgundy);
+  border-bottom: 1px solid var(--reader-gold);
+}
+
+.reader-prose {
+  line-height: 1.85;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+.reader-verse-number {
+  font-size: 0.56em;
+  margin-right: 0.35em;
+  font-weight: 500;
+  color: var(--reader-verse);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reader-header,
+  .reader-sheet {
+    transition: none;
+    animation: none;
+  }
 }
