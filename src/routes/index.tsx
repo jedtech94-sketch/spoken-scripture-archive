@@ -11,6 +11,8 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "A study Bible with KJV, BSB, WEB and ASV, the Ethiopian deuterocanon, cross-references and offline reading." },
       { property: "og:title", content: "Chikuni Study Bible" },
       { property: "og:description", content: "Four translations, the Ethiopian canon, cross-references and offline audio reading." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Home,

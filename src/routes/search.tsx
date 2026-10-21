@@ -12,6 +12,8 @@ export const Route = createFileRoute("/search")({
       { name: "description", content: "Search the full text of every chapter saved on your device, offline." },
       { property: "og:title", content: "Search — Chikuni Study Bible" },
       { property: "og:description", content: "Offline full-text search across your saved chapters." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: SearchPage,
