@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Bookmark, Sun, Moon, Download, Check, ArrowLeft, BookOpen, Minus, Plus, ArrowUpRight } from "lucide-react";
 import { AppShell, useReaderTheme } from "@/components/AppShell";
 import { AudioBar } from "@/components/AudioBar";
+import { StudyAssistant } from "@/components/StudyAssistant";
 import { getBook, TRANSLATIONS, type Translation } from "@/data/books";
 import { BUNDLED_TEXTS } from "@/data/bundled-texts";
 import { XREFS, type Ref } from "@/data/xrefs";
@@ -176,6 +177,7 @@ function Reader() {
       </Sheet>
 
       {data && <AudioBar verses={data.verses} title={title} onVerse={setReading} />}
+      {data && <StudyAssistant title={title} verses={data.verses} />}
     </AppShell>
   );
 }
