@@ -6,7 +6,7 @@ import { createLovableAiGatewayRunIdFetch } from "./run-id.server";
 export const GEMINI_MODEL = "google/gemini-3.5-flash";
 
 function provider() {
-  const key = process.env.LOVABLE_API_KEY;
+  const key = process.env["LOVABLE_API_KEY"];
   if (!key) throw new Error("AI is not configured.");
   const runId = createLovableAiGatewayRunIdFetch();
   return createOpenAICompatible({
