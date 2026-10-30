@@ -13,6 +13,8 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BookmarksRouteImport } from './routes/bookmarks'
 import { Route as LibraryRouteImport } from './routes/library'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as ApiStudyRouteImport } from './routes/api/study'
+import { Route as ApiVoiceCommandRouteImport } from './routes/api/voice-command'
 import { Route as ReadBookIdChapterRouteImport } from './routes/read.$bookId.$chapter'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +37,16 @@ const SearchRoute = SearchRouteImport.update({
   path: '/search',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiStudyRoute = ApiStudyRouteImport.update({
+  id: '/api/study',
+  path: '/api/study',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiVoiceCommandRoute = ApiVoiceCommandRouteImport.update({
+  id: '/api/voice-command',
+  path: '/api/voice-command',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReadBookIdChapterRoute = ReadBookIdChapterRouteImport.update({
   id: '/read/$bookId/$chapter',
   path: '/read/$bookId/$chapter',
@@ -46,6 +58,8 @@ export interface FileRoutesByFullPath {
   '/bookmarks': typeof BookmarksRoute
   '/library': typeof LibraryRoute
   '/search': typeof SearchRoute
+  '/api/study': typeof ApiStudyRoute
+  '/api/voice-command': typeof ApiVoiceCommandRoute
   '/read/$bookId/$chapter': typeof ReadBookIdChapterRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +67,8 @@ export interface FileRoutesByTo {
   '/bookmarks': typeof BookmarksRoute
   '/library': typeof LibraryRoute
   '/search': typeof SearchRoute
+  '/api/study': typeof ApiStudyRoute
+  '/api/voice-command': typeof ApiVoiceCommandRoute
   '/read/$bookId/$chapter': typeof ReadBookIdChapterRoute
 }
 export interface FileRoutesById {
@@ -61,20 +77,37 @@ export interface FileRoutesById {
   '/bookmarks': typeof BookmarksRoute
   '/library': typeof LibraryRoute
   '/search': typeof SearchRoute
+  '/api/study': typeof ApiStudyRoute
+  '/api/voice-command': typeof ApiVoiceCommandRoute
   '/read/$bookId/$chapter': typeof ReadBookIdChapterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/bookmarks' | '/library' | '/search' | '/read/$bookId/$chapter'
+    | '/'
+    | '/bookmarks'
+    | '/library'
+    | '/search'
+    | '/api/study'
+    | '/api/voice-command'
+    | '/read/$bookId/$chapter'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bookmarks' | '/library' | '/search' | '/read/$bookId/$chapter'
+  to:
+    | '/'
+    | '/bookmarks'
+    | '/library'
+    | '/search'
+    | '/api/study'
+    | '/api/voice-command'
+    | '/read/$bookId/$chapter'
   id:
     | '__root__'
     | '/'
     | '/bookmarks'
     | '/library'
     | '/search'
+    | '/api/study'
+    | '/api/voice-command'
     | '/read/$bookId/$chapter'
   fileRoutesById: FileRoutesById
 }
@@ -83,6 +116,8 @@ export interface RootRouteChildren {
   BookmarksRoute: typeof BookmarksRoute
   LibraryRoute: typeof LibraryRoute
   SearchRoute: typeof SearchRoute
+  ApiStudyRoute: typeof ApiStudyRoute
+  ApiVoiceCommandRoute: typeof ApiVoiceCommandRoute
   ReadBookIdChapterRoute: typeof ReadBookIdChapterRoute
 }
 
@@ -116,6 +151,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/study': {
+      id: '/api/study'
+      path: '/api/study'
+      fullPath: '/api/study'
+      preLoaderRoute: typeof ApiStudyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/voice-command': {
+      id: '/api/voice-command'
+      path: '/api/voice-command'
+      fullPath: '/api/voice-command'
+      preLoaderRoute: typeof ApiVoiceCommandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/read/$bookId/$chapter': {
       id: '/read/$bookId/$chapter'
       path: '/read/$bookId/$chapter'
@@ -131,6 +180,8 @@ const rootRouteChildren: RootRouteChildren = {
   BookmarksRoute: BookmarksRoute,
   LibraryRoute: LibraryRoute,
   SearchRoute: SearchRoute,
+  ApiStudyRoute: ApiStudyRoute,
+  ApiVoiceCommandRoute: ApiVoiceCommandRoute,
   ReadBookIdChapterRoute: ReadBookIdChapterRoute,
 }
 export const routeTree = rootRouteImport

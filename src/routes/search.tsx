@@ -16,11 +16,14 @@ export const Route = createFileRoute("/search")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
+  validateSearch: (s: Record<string, unknown>): { q?: string } => (typeof s["q"] === "string" ? { q: s["q"] } : {}),
   component: SearchPage,
 });
 
 function SearchPage() {
-  const [q, setQ] = useState("");
+  const { q: initialQ } = Route.useSearch();
+  const [q, setQ] = useState(initialQ ?? "");
+  useEffect(() => { if (initialQ) setQ(initialQ); }, [initialQ]);
   const [hits, setHits] = useState<Hit[]>([]);
   const [count, setCount] = useState(0);
   useEffect(() => { countCached().then(setCount); }, []);
