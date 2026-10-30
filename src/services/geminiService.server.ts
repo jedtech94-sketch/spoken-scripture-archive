@@ -26,7 +26,7 @@ export function streamStudyAnswer(opts: { messages: ModelMessage[]; passage: str
     system: `${STUDY_SYSTEM}\n\nThe reader currently has open:\n${opts.passage.slice(0, 12000)}`,
     messages: opts.messages,
     maxRetries: 0,
-    abortSignal: opts.signal,
+    ...(opts.signal ? { abortSignal: opts.signal } : {}),
   });
 }
 
